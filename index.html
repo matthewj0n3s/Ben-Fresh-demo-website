@@ -15,7 +15,6 @@
   }
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
-
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
@@ -30,7 +29,6 @@
   .nav-links a:hover { color: var(--gold); }
   .nav-cta { background: var(--red); color: var(--cream) !important; padding: 0.55rem 1.4rem; border-radius: 2px; transition: background 0.2s !important; }
   .nav-cta:hover { background: var(--red-dark) !important; }
-
   .hero { min-height: 100vh; background: var(--charcoal); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
   .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 6rem 5rem; position: relative; z-index: 2; }
   .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
@@ -55,13 +53,11 @@
   .hero-badge-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--cream); line-height: 1; }
   .hero-badge-sub { font-size: 0.6rem; color: rgba(249,244,236,0.8); text-transform: uppercase; letter-spacing: 0.1em; }
   @keyframes spin-slow { to { transform: rotate(360deg); } }
-
   .marquee-strip { background: var(--red); padding: 0.75rem 0; overflow: hidden; white-space: nowrap; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); }
   .marquee-track { display: inline-flex; animation: marquee 35s linear infinite; }
   .marquee-item { display: inline-flex; align-items: center; gap: 1.5rem; padding: 0 2rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); }
   .marquee-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
   .about { display: grid; grid-template-columns: 1fr 1fr; }
   .about-visual { background: var(--charcoal-mid); display: flex; align-items: center; justify-content: center; padding: 6rem 4rem; position: relative; overflow: hidden; }
   .about-visual::before { content: ''; position: absolute; top: -40%; left: -20%; width: 300px; height: 300px; border-radius: 50%; background: rgba(200,52,26,0.15); }
@@ -81,7 +77,6 @@
   .info-card { padding: 1.25rem; background: var(--cream-dark); border-radius: 4px; border-left: 3px solid var(--gold); }
   .info-card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 0.35rem; }
   .info-card-value { font-size: 0.95rem; font-weight: 500; color: var(--charcoal); line-height: 1.45; }
-
   .menu-section { background: var(--charcoal); padding: 8rem 5rem; }
   .menu-header { text-align: center; margin-bottom: 4rem; }
   .menu-header .section-eyebrow { justify-content: center; }
@@ -98,12 +93,7 @@
   .menu-card-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--cream); line-height: 1.3; }
   .menu-card-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(249,244,236,0.5); }
   .menu-badge { display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 0.5rem; background: rgba(200,52,26,0.3); color: rgba(249,244,236,0.9); }
-  .menu-list { list-style: none; }
-  .menu-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(249,244,236,0.06); color: rgba(249,244,236,0.65); font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; }
-  .menu-list li::before { content: '—'; color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
-  .menu-list li:last-child { border-bottom: none; }
   .menu-card-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(212,164,68,0.7); margin-bottom: 0.75rem; }
-
   .reviews-section { background: var(--cream-dark); padding: 8rem 5rem; }
   .reviews-header { text-align: center; margin-bottom: 4rem; }
   .reviews-header .section-eyebrow { justify-content: center; }
@@ -119,7 +109,6 @@
   .rating-right { border-left: 1px solid rgba(249,244,236,0.15); padding-left: 2.5rem; }
   .rating-stars-lg { color: var(--gold); font-size: 1.2rem; letter-spacing: 3px; }
   .rating-count { font-size: 0.85rem; color: rgba(249,244,236,0.5); margin-top: 0.5rem; }
-
   .cta-section { background: var(--red); padding: 8rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
   .cta-left .section-title { color: var(--cream); margin-bottom: 1.25rem; }
   .cta-left .section-title em { color: var(--gold); }
@@ -131,7 +120,6 @@
   .contact-value { font-size: 0.95rem; font-weight: 500; color: var(--cream); }
   .contact-value a { color: inherit; text-decoration: none; }
   .contact-value a:hover { text-decoration: underline; }
-
   .hours-section { background: var(--cream); padding: 8rem 5rem; }
   .hours-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
   .hours-title-block .section-title { margin-bottom: 1.5rem; }
@@ -140,7 +128,6 @@
   .hours-day { font-size: 0.85rem; font-weight: 500; color: var(--charcoal); }
   .hours-time { font-size: 0.85rem; color: #2A7A4A; font-weight: 500; }
   .hours-late { color: #1A5A9A; }
-
   footer { background: var(--charcoal); padding: 3rem 5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212,164,68,0.2); }
   .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--cream); }
   .footer-logo span { color: var(--gold); }
@@ -148,7 +135,6 @@
   .footer-socials { display: flex; gap: 1rem; }
   .footer-social { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(249,244,236,0.2); display: flex; align-items: center; justify-content: center; color: rgba(249,244,236,0.5); text-decoration: none; font-size: 0.8rem; transition: border-color 0.2s, color 0.2s; }
   .footer-social:hover { border-color: var(--gold); color: var(--gold); }
-
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
@@ -167,7 +153,6 @@
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-logo">Ben's <span>Fresh</span></div>
   <ul class="nav-links">
@@ -250,6 +235,7 @@
   </div>
 </div>
 
+<!-- ABOUT SECTION -->
 <section class="about" id="about">
   <div class="about-visual">
     <div class="about-grid-art">
@@ -271,7 +257,7 @@
       </div>
     </div>
   </div>
-  <div class="about-content" id="menu">
+  <div class="about-content">
     <p class="section-eyebrow">Our Story</p>
     <h2 class="section-title">Real food, made <em>fresh</em> every day</h2>
     <p class="about-body">Ben's Fresh has been proudly serving Port Jervis since 2016. Chef Bobby and the crew are committed to delivering the freshest ingredients and continually creating new and exciting specials. The menu is big, bold, and constantly evolving — burgers, hot dogs, comfort food, creative wraps, quesadillas, ice cream, and some of the most unique desserts you'll find anywhere.</p>
@@ -297,7 +283,8 @@
   </div>
 </section>
 
-<section class="menu-section">
+<!-- MENU SECTION - NOW CORRECTLY ID'ED -->
+<section class="menu-section" id="menu">
   <div class="menu-header">
     <p class="section-eyebrow">What We Serve</p>
     <h2 class="section-title" style="color:var(--cream)">Our <em style="color:var(--gold)">Menu</em></h2>
@@ -311,7 +298,6 @@
     <button class="menu-tab" data-cat="kids">Kids Menu</button>
   </div>
   <div class="menu-grid">
-
     <!-- TOP SELLERS -->
     <div class="menu-card visible" data-cat="topSellers">
       <div class="menu-badge">Most Ordered</div>
@@ -459,7 +445,6 @@
       <div class="menu-card-top"><div class="menu-card-name">Kids' Meals</div></div>
       <div class="menu-card-desc">Hamburger, Cheeseburger, Hot Dog, Grilled Cheese, Chicken Nuggets, Macaroni &amp; Cheese, Crispy Chicken, Cheese Quesadilla, or Grilled Chicken.</div>
     </div>
-
   </div>
   <p style="text-align:center; color:rgba(249,244,236,0.35); font-size:0.78rem; margin-top:2.5rem; font-style:italic;">Menu changes regularly — follow on Facebook for weekly specials &amp; features. Call for full current menu: (845) 856-9760</p>
 </section>
