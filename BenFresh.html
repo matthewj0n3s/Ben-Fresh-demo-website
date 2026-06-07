@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ben's Fresh — Port Jervis, NY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --red: #C8341A; --red-dark: #8B2010;
+    --cream: #F9F4EC; --cream-dark: #EDE5D4;
+    --charcoal: #1E1A16; --charcoal-mid: #3A3028;
+    --gold: #D4A444; --text-muted: #7A6A5A;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(30,26,22,0.93); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(212,164,68,0.25);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--cream); letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: rgba(249,244,236,0.7); text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: var(--red); color: var(--cream) !important; padding: 0.55rem 1.4rem; border-radius: 2px; transition: background 0.2s !important; }
+  .nav-cta:hover { background: var(--red-dark) !important; }
+
+  .hero { min-height: 100vh; background: var(--charcoal); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 6rem 5rem; position: relative; z-index: 2; }
+  .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.0; color: var(--cream); margin-bottom: 1.5rem; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-desc { font-size: 1.05rem; line-height: 1.75; color: rgba(249,244,236,0.65); max-width: 380px; margin-bottom: 3rem; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--red); color: var(--cream); padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; transition: background 0.2s, transform 0.15s; display: inline-block; }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+  .btn-outline { border: 1px solid rgba(249,244,236,0.3); color: var(--cream); padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; transition: border-color 0.2s, background 0.2s; }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(212,164,68,0.08); }
+  .hero-stats { display: flex; gap: 2.5rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid rgba(249,244,236,0.1); }
+  .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
+  .hero-stat-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(249,244,236,0.45); margin-top: 0.15rem; }
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-right-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,52,26,0.15) 0%, transparent 60%), repeating-linear-gradient(-45deg, rgba(212,164,68,0.03) 0px, rgba(212,164,68,0.03) 1px, transparent 1px, transparent 60px); background-color: #2A2218; }
+  .hero-burger-art { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 340px; }
+  .hero-badge { position: absolute; bottom: 3rem; right: 3rem; width: 110px; height: 110px; border-radius: 50%; background: var(--red); display: flex; flex-direction: column; align-items: center; justify-content: center; animation: spin-slow 20s linear infinite; }
+  .hero-badge-inner { text-align: center; animation: spin-slow 20s linear infinite reverse; }
+  .hero-badge-stars { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; }
+  .hero-badge-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--cream); line-height: 1; }
+  .hero-badge-sub { font-size: 0.6rem; color: rgba(249,244,236,0.8); text-transform: uppercase; letter-spacing: 0.1em; }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+  .marquee-strip { background: var(--red); padding: 0.75rem 0; overflow: hidden; white-space: nowrap; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); }
+  .marquee-track { display: inline-flex; animation: marquee 35s linear infinite; }
+  .marquee-item { display: inline-flex; align-items: center; gap: 1.5rem; padding: 0 2rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); }
+  .marquee-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .about { display: grid; grid-template-columns: 1fr 1fr; }
+  .about-visual { background: var(--charcoal-mid); display: flex; align-items: center; justify-content: center; padding: 6rem 4rem; position: relative; overflow: hidden; }
+  .about-visual::before { content: ''; position: absolute; top: -40%; left: -20%; width: 300px; height: 300px; border-radius: 50%; background: rgba(200,52,26,0.15); }
+  .about-grid-art { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 340px; }
+  .about-grid-card { background: rgba(249,244,236,0.06); border: 1px solid rgba(212,164,68,0.2); border-radius: 4px; padding: 1.5rem 1.25rem; text-align: center; }
+  .about-grid-card.accent { background: var(--red); border-color: var(--red); }
+  .about-grid-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .about-grid-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(249,244,236,0.6); }
+  .about-grid-card.accent .about-grid-lbl { color: rgba(249,244,236,0.85); }
+  .about-content { padding: 6rem 5rem; background: var(--cream); display: flex; flex-direction: column; justify-content: center; }
+  .section-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-eyebrow::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--red); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem; }
+  .section-title em { font-style: italic; color: var(--red); }
+  .about-body { font-size: 1rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 1rem; }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
+  .info-card { padding: 1.25rem; background: var(--cream-dark); border-radius: 4px; border-left: 3px solid var(--gold); }
+  .info-card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 0.35rem; }
+  .info-card-value { font-size: 0.95rem; font-weight: 500; color: var(--charcoal); line-height: 1.45; }
+
+  .menu-section { background: var(--charcoal); padding: 8rem 5rem; }
+  .menu-header { text-align: center; margin-bottom: 4rem; }
+  .menu-header .section-eyebrow { justify-content: center; }
+  .menu-header .section-eyebrow::before { display: none; }
+  .menu-header .section-title { color: var(--cream); }
+  .menu-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+  .menu-tab { padding: 0.5rem 1.4rem; border-radius: 2px; background: transparent; border: 1px solid rgba(249,244,236,0.2); color: rgba(249,244,236,0.6); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .menu-tab.active, .menu-tab:hover { background: var(--red); border-color: var(--red); color: var(--cream); }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .menu-card { background: rgba(249,244,236,0.04); border: 1px solid rgba(249,244,236,0.08); border-radius: 4px; padding: 1.75rem; transition: border-color 0.2s, background 0.2s; display: none; }
+  .menu-card.visible { display: block; }
+  .menu-card:hover { border-color: rgba(212,164,68,0.35); background: rgba(249,244,236,0.06); }
+  .menu-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+  .menu-card-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--cream); line-height: 1.3; }
+  .menu-card-desc { font-size: 0.85rem; line-height: 1.65; color: rgba(249,244,236,0.5); }
+  .menu-badge { display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 0.5rem; background: rgba(200,52,26,0.3); color: rgba(249,244,236,0.9); }
+  .menu-list { list-style: none; }
+  .menu-list li { padding: 0.5rem 0; border-bottom: 1px solid rgba(249,244,236,0.06); color: rgba(249,244,236,0.65); font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; }
+  .menu-list li::before { content: '—'; color: var(--gold); font-size: 0.7rem; flex-shrink: 0; }
+  .menu-list li:last-child { border-bottom: none; }
+  .menu-card-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(212,164,68,0.7); margin-bottom: 0.75rem; }
+
+  .reviews-section { background: var(--cream-dark); padding: 8rem 5rem; }
+  .reviews-header { text-align: center; margin-bottom: 4rem; }
+  .reviews-header .section-eyebrow { justify-content: center; }
+  .reviews-header .section-eyebrow::before { display: none; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .review-card { background: var(--cream); border: 1px solid rgba(30,26,22,0.08); border-radius: 4px; padding: 2rem; position: relative; }
+  .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
+  .review-text { font-size: 0.95rem; line-height: 1.75; color: var(--charcoal); margin-bottom: 1.5rem; font-style: italic; }
+  .review-author { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .review-quote-mark { position: absolute; top: 1.25rem; right: 1.5rem; font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: rgba(200,52,26,0.08); line-height: 1; }
+  .rating-showcase { display: flex; align-items: center; justify-content: center; gap: 3rem; margin-bottom: 4rem; padding: 2.5rem; background: var(--charcoal); border-radius: 4px; }
+  .rating-big { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .rating-right { border-left: 1px solid rgba(249,244,236,0.15); padding-left: 2.5rem; }
+  .rating-stars-lg { color: var(--gold); font-size: 1.2rem; letter-spacing: 3px; }
+  .rating-count { font-size: 0.85rem; color: rgba(249,244,236,0.5); margin-top: 0.5rem; }
+
+  .cta-section { background: var(--red); padding: 8rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .cta-left .section-title { color: var(--cream); margin-bottom: 1.25rem; }
+  .cta-left .section-title em { color: var(--gold); }
+  .cta-left p { color: rgba(249,244,236,0.75); line-height: 1.75; font-size: 1rem; }
+  .cta-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.5rem; background: rgba(249,244,236,0.1); border-radius: 4px; border: 1px solid rgba(249,244,236,0.15); }
+  .contact-icon { width: 44px; height: 44px; border-radius: 50%; background: rgba(249,244,236,0.15); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .contact-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(249,244,236,0.55); margin-bottom: 0.25rem; }
+  .contact-value { font-size: 0.95rem; font-weight: 500; color: var(--cream); }
+  .contact-value a { color: inherit; text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  .hours-section { background: var(--cream); padding: 8rem 5rem; }
+  .hours-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .hours-title-block .section-title { margin-bottom: 1.5rem; }
+  .hours-note { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; border-bottom: 1px solid var(--cream-dark); }
+  .hours-day { font-size: 0.85rem; font-weight: 500; color: var(--charcoal); }
+  .hours-time { font-size: 0.85rem; color: #2A7A4A; font-weight: 500; }
+  .hours-late { color: #1A5A9A; }
+
+  footer { background: var(--charcoal); padding: 3rem 5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212,164,68,0.2); }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--cream); }
+  .footer-logo span { color: var(--gold); }
+  .footer-text { font-size: 0.8rem; color: rgba(249,244,236,0.4); }
+  .footer-socials { display: flex; gap: 1rem; }
+  .footer-social { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(249,244,236,0.2); display: flex; align-items: center; justify-content: center; color: rgba(249,244,236,0.5); text-decoration: none; font-size: 0.8rem; transition: border-color 0.2s, color 0.2s; }
+  .footer-social:hover { border-color: var(--gold); color: var(--gold); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 2rem 5rem; }
+    .about { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+    .about-content { padding: 4rem 2rem; }
+    .menu-section, .reviews-section, .cta-section, .hours-section { padding: 5rem 2rem; }
+    .menu-grid, .reviews-grid { grid-template-columns: 1fr; }
+    .hours-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .cta-section { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Ben's <span>Fresh</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#contact" class="nav-cta">Visit Us</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Port Jervis, New York · Since 2016</p>
+    <h1>Fresh. <em>Bold.</em> Done Right.</h1>
+    <p class="hero-desc">Burgers, hot dogs, comfort food, ice cream and desserts — all made fresh daily by Chef Bobby and crew. A Port Jervis staple since 2016.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">View Our Menu</a>
+      <a href="tel:+18458569760" class="btn-outline">Call to Order</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">4.4★</div>
+        <div class="hero-stat-lbl">Google Rating</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">1,500+</div>
+        <div class="hero-stat-lbl">Reviews</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">Since '16</div>
+        <div class="hero-stat-lbl">Port Jervis Staple</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <svg class="hero-burger-art" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="170" cy="100" rx="120" ry="70" fill="#C8341A" opacity="0.9"/>
+      <ellipse cx="170" cy="100" rx="100" ry="52" fill="#D4A444" opacity="0.6"/>
+      <ellipse cx="140" cy="82" rx="8" ry="5" fill="#F9F4EC" opacity="0.5" transform="rotate(-20 140 82)"/>
+      <ellipse cx="175" cy="72" rx="8" ry="5" fill="#F9F4EC" opacity="0.5" transform="rotate(10 175 72)"/>
+      <ellipse cx="208" cy="85" rx="7" ry="4.5" fill="#F9F4EC" opacity="0.5" transform="rotate(-10 208 85)"/>
+      <path d="M55 155 Q90 135 130 150 Q155 138 170 152 Q195 136 220 150 Q255 138 285 155 Q280 168 255 170 Q220 158 200 168 Q185 158 170 167 Q155 157 140 167 Q115 158 85 170 Q60 168 55 155Z" fill="#3A7A2A" opacity="0.85"/>
+      <ellipse cx="170" cy="178" rx="108" ry="14" fill="#C8341A" opacity="0.7"/>
+      <path d="M55 192 L285 192 L295 205 L285 218 L55 218 L45 205 Z" fill="#D4A444" opacity="0.8"/>
+      <ellipse cx="170" cy="232" rx="115" ry="22" fill="#3A2818" opacity="0.95"/>
+      <ellipse cx="170" cy="226" rx="115" ry="20" fill="#5A3820"/>
+      <ellipse cx="170" cy="255" rx="120" ry="28" fill="#D4A444" opacity="0.9"/>
+      <ellipse cx="170" cy="275" rx="118" ry="16" fill="#C8341A" opacity="0.5"/>
+    </svg>
+    <div class="hero-badge">
+      <div class="hero-badge-inner">
+        <div class="hero-badge-stars">★★★★</div>
+        <div class="hero-badge-num">4.4</div>
+        <div class="hero-badge-sub">Rated</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Burgers</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Hot Dogs</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ice Cream</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Wraps</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Quesadillas</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Desserts</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Fresh Daily</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Port Jervis NY</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Burgers</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Hot Dogs</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Ice Cream</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Wraps</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Quesadillas</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Desserts</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Fresh Daily</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Port Jervis NY</span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-grid-art">
+      <div class="about-grid-card">
+        <div class="about-grid-icon">🍔</div>
+        <div class="about-grid-lbl">Burgers</div>
+      </div>
+      <div class="about-grid-card">
+        <div class="about-grid-icon">🍦</div>
+        <div class="about-grid-lbl">Ice Cream</div>
+      </div>
+      <div class="about-grid-card accent">
+        <div class="about-grid-icon">🌯</div>
+        <div class="about-grid-lbl">Wraps</div>
+      </div>
+      <div class="about-grid-card">
+        <div class="about-grid-icon">🌮</div>
+        <div class="about-grid-lbl">Quesadillas</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-content" id="menu">
+    <p class="section-eyebrow">Our Story</p>
+    <h2 class="section-title">Real food, made <em>fresh</em> every day</h2>
+    <p class="about-body">Ben's Fresh has been proudly serving Port Jervis since 2016. Chef Bobby and the crew are committed to delivering the freshest ingredients and continually creating new and exciting specials. The menu is big, bold, and constantly evolving — burgers, hot dogs, comfort food, creative wraps, quesadillas, ice cream, and some of the most unique desserts you'll find anywhere.</p>
+    <p class="about-body">Outdoor seating, a large parking lot, a kids' menu, and a welcoming family atmosphere make it a must-stop whether you're a local or just passing through on I-84.</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-label">Location</div>
+        <div class="info-card-value">33 E Main St<br>Port Jervis, NY 12771</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Phone</div>
+        <div class="info-card-value"><a href="tel:+18458569760" style="color:inherit;text-decoration:none">(845) 856-9760</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Payments</div>
+        <div class="info-card-value">Visa, Mastercard, Debit &amp; NFC Pay</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Options</div>
+        <div class="info-card-value">Dine-In, Takeout &amp; Outdoor Seating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section">
+  <div class="menu-header">
+    <p class="section-eyebrow">What We Serve</p>
+    <h2 class="section-title" style="color:var(--cream)">Our <em style="color:var(--gold)">Menu</em></h2>
+  </div>
+  <div class="menu-tabs">
+    <button class="menu-tab active" data-cat="topSellers">Top Sellers</button>
+    <button class="menu-tab" data-cat="starters">Starters</button>
+    <button class="menu-tab" data-cat="nachosFries">Nachos & Fries</button>
+    <button class="menu-tab" data-cat="quesadillas">Quesadillas</button>
+    <button class="menu-tab" data-cat="desserts">Desserts & Ice Cream</button>
+    <button class="menu-tab" data-cat="kids">Kids Menu</button>
+  </div>
+  <div class="menu-grid">
+
+    <!-- TOP SELLERS -->
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-badge">Most Ordered</div>
+      <div class="menu-card-top"><div class="menu-card-name">Benny Burger Combo</div></div>
+      <div class="menu-card-desc">100% pure fresh beef, custom ground, cooked fresh to order on a non-GMO toasted potato bun. Includes fries &amp; drink. Add ketchup, pickle, mustard, onion, mayo, or Benny Sauce — free!</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-badge">Fan Favorite</div>
+      <div class="menu-card-top"><div class="menu-card-name">Chicken Wrap Combo</div></div>
+      <div class="menu-card-desc">Crispy hand-breaded chicken in a wrap with your choice of toppings. Combo includes fresh-cut fries &amp; drink.</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-card-top"><div class="menu-card-name">Crispy Chicken Sandwich</div></div>
+      <div class="menu-card-desc">Hand-breaded, super fresh and juicy crispy chicken on a great roll. Comes with a generous portion of fries.</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-card-top"><div class="menu-card-name">Hot Dog Combo</div></div>
+      <div class="menu-card-desc">A classic done right. Also available as the Benny Dog or Backyard Dog. Combo includes fries &amp; drink.</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-card-top"><div class="menu-card-name">Chicken &amp; Waffles</div></div>
+      <div class="menu-card-desc">A comfort food favorite — crispy chicken paired with golden waffles. One of the chef's signature dishes.</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-card-top"><div class="menu-card-name">Philly Cheesesteak Wrap</div></div>
+      <div class="menu-card-desc">Shredded steak loaded into a wrap. Reviews rave about it — one of the most talked-about items on the menu.</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-card-top"><div class="menu-card-name">Grilled Cheese Combo</div></div>
+      <div class="menu-card-desc">Comfort food classic, perfectly golden. Combo comes with fresh-cut fries &amp; drink.</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-card-top"><div class="menu-card-name">Fish &amp; Chips</div></div>
+      <div class="menu-card-desc">Fresh fish in a crispy batter, served with hand-cut fries. A hearty, satisfying meal.</div>
+    </div>
+    <div class="menu-card visible" data-cat="topSellers">
+      <div class="menu-card-top"><div class="menu-card-name">Crispy Chicken Mac &amp; Cheese Melt</div></div>
+      <div class="menu-card-desc">Crispy chicken meets creamy mac and cheese in one glorious melt. A Ben's Fresh original.</div>
+    </div>
+
+    <!-- STARTERS -->
+    <div class="menu-card" data-cat="starters">
+      <div class="menu-card-top"><div class="menu-card-name">Mozzarella Sticks</div></div>
+      <div class="menu-card-desc">Golden, gooey, and perfectly fried. A classic starter done right.</div>
+    </div>
+    <div class="menu-card" data-cat="starters">
+      <div class="menu-badge">Must Try</div>
+      <div class="menu-card-top"><div class="menu-card-name">Buffalo Chicken Rangoons</div></div>
+      <div class="menu-card-desc">Spicy, crispy, and totally unique. Buffalo chicken stuffed in a crispy rangoon shell.</div>
+    </div>
+    <div class="menu-card" data-cat="starters">
+      <div class="menu-card-top"><div class="menu-card-name">Fried Cheese Curds</div></div>
+      <div class="menu-card-desc">Irresistible fried cheese curds — melty inside, crispy outside.</div>
+    </div>
+    <div class="menu-card" data-cat="starters">
+      <div class="menu-card-top"><div class="menu-card-name">Jalapeño Cheddar Bites</div></div>
+      <div class="menu-card-desc">Spicy jalapeño meets sharp cheddar in a perfectly fried bite.</div>
+    </div>
+    <div class="menu-card" data-cat="starters">
+      <div class="menu-card-top"><div class="menu-card-name">Mac &amp; Cheese Bites</div></div>
+      <div class="menu-card-desc">Comfort food taken to the next level — mac &amp; cheese in crispy bite-sized form.</div>
+    </div>
+    <div class="menu-card" data-cat="starters">
+      <div class="menu-card-top"><div class="menu-card-name">Buffalo Shrimp</div></div>
+      <div class="menu-card-desc">Crispy shrimp tossed in bold buffalo sauce. Great to share or keep all to yourself.</div>
+    </div>
+
+    <!-- NACHOS & FRIES -->
+    <div class="menu-card" data-cat="nachosFries">
+      <div class="menu-card-subtitle">Fresh Made Nachos</div>
+      <div class="menu-card-top"><div class="menu-card-name">Buffalo Chicken Nachos</div></div>
+      <div class="menu-card-desc">Loaded nachos with crispy buffalo chicken. Bold flavor in every bite.</div>
+    </div>
+    <div class="menu-card" data-cat="nachosFries">
+      <div class="menu-card-subtitle">Fresh Made Nachos</div>
+      <div class="menu-card-top"><div class="menu-card-name">BBQ Chicken Nachos</div></div>
+      <div class="menu-card-desc">Smoky BBQ chicken piled high on fresh nachos with all the fixings.</div>
+    </div>
+    <div class="menu-card" data-cat="nachosFries">
+      <div class="menu-card-subtitle">Fresh Made Nachos</div>
+      <div class="menu-card-top"><div class="menu-card-name">Chicken Bacon Ranch Nachos</div></div>
+      <div class="menu-card-desc">The crowd favorite nacho combo — chicken, bacon, and creamy ranch.</div>
+    </div>
+    <div class="menu-card" data-cat="nachosFries">
+      <div class="menu-card-subtitle">Fresh Made Nachos</div>
+      <div class="menu-card-top"><div class="menu-card-name">Cheesesteak Nachos</div></div>
+      <div class="menu-card-desc">All the flavors of a Philly cheesesteak, loaded onto fresh-made nachos.</div>
+    </div>
+    <div class="menu-card" data-cat="nachosFries">
+      <div class="menu-card-subtitle">Specialty Fries</div>
+      <div class="menu-card-top"><div class="menu-card-name">Fresh Cut Fries</div></div>
+      <div class="menu-card-desc">Hand-cut and seasoned perfectly. Reviewers say a small size can feed three people.</div>
+    </div>
+    <div class="menu-card" data-cat="nachosFries">
+      <div class="menu-card-subtitle">Specialty Fries</div>
+      <div class="menu-card-top"><div class="menu-card-name">Specialty Fries</div></div>
+      <div class="menu-card-desc">Choose from: Cheese Fries, Cheddar Bacon Ranch Fries, Chili Cheese Fries, Bacon Mac &amp; Cheese Fries, or Disco Fries.</div>
+    </div>
+
+    <!-- QUESADILLAS -->
+    <div class="menu-card" data-cat="quesadillas">
+      <div class="menu-card-top"><div class="menu-card-name">Classic Quesadillas</div></div>
+      <div class="menu-card-desc">Cheese, Buffalo Chicken, BBQ Chicken, Veggie, or Chicken Bacon Ranch.</div>
+    </div>
+    <div class="menu-card" data-cat="quesadillas">
+      <div class="menu-badge">Popular</div>
+      <div class="menu-card-top"><div class="menu-card-name">Specialty Quesadillas</div></div>
+      <div class="menu-card-desc">Cheesesteak, Crispy Shrimp, Wild West, Double Bacon Cheeseburger, or Birria.</div>
+    </div>
+    <div class="menu-card" data-cat="quesadillas">
+      <div class="menu-card-top"><div class="menu-card-name">Signature Quesadillas</div></div>
+      <div class="menu-card-desc">Cheesesteak Alfredo, Wyatt Earp, The Drunken Sailor, and The Gruber.</div>
+    </div>
+
+    <!-- DESSERTS & ICE CREAM -->
+    <div class="menu-card" data-cat="desserts">
+      <div class="menu-badge">Must Have</div>
+      <div class="menu-card-top"><div class="menu-card-name">Funnel Cake Fries</div></div>
+      <div class="menu-card-desc">"One of a kind" — a Port Jervis legend according to regulars. Sweet, crispy, and totally addictive.</div>
+    </div>
+    <div class="menu-card" data-cat="desserts">
+      <div class="menu-card-top"><div class="menu-card-name">Ice Cream Parfaits</div></div>
+      <div class="menu-card-desc">Massive, creative parfaits: Cannoli, Peanut Butter, Thin Mint Crunch, Cookie Monster, Strawberry Shortcake, M&amp;M Cookie Dough, Birthday Crunch, Caramel Brownie Cheesecake, and more.</div>
+    </div>
+    <div class="menu-card" data-cat="desserts">
+      <div class="menu-badge">Fan Favorite</div>
+      <div class="menu-card-top"><div class="menu-card-name">Dessert Nachos &amp; Banana Split</div></div>
+      <div class="menu-card-desc">Sweet nachos loaded with dessert toppings, plus classic banana splits done the Ben's Fresh way.</div>
+    </div>
+    <div class="menu-card" data-cat="desserts">
+      <div class="menu-card-top"><div class="menu-card-name">Deep Fried Treats</div></div>
+      <div class="menu-card-desc">Deep Fried Oreos, Deep Fried Twinkie Sundae, and more. Indulge yourself.</div>
+    </div>
+    <div class="menu-card" data-cat="desserts">
+      <div class="menu-card-top"><div class="menu-card-name">Hard Ice Cream Scoops</div></div>
+      <div class="menu-card-desc">Dozens of flavors including: Panda Paws, Cookie Dough, Banana Cream Pie, Apple Pie, Birthday Bash, Black Raspberry, Cotton Candy, French Roast Coffee, Pistachio Nut, Butter Pecan, and more.</div>
+    </div>
+    <div class="menu-card" data-cat="desserts">
+      <div class="menu-card-top"><div class="menu-card-name">Stuffedwich &amp; More</div></div>
+      <div class="menu-card-desc">Mini or Mega Stuffedwich, Oreo Cheesecake Concrete, Cookie Dough Bowl Sundae, and Chocolate Dipped Waffle Cone.</div>
+    </div>
+
+    <!-- KIDS -->
+    <div class="menu-card" data-cat="kids">
+      <div class="menu-card-top"><div class="menu-card-name">Kids' Meals</div></div>
+      <div class="menu-card-desc">Hamburger, Cheeseburger, Hot Dog, Grilled Cheese, Chicken Nuggets, Macaroni &amp; Cheese, Crispy Chicken, Cheese Quesadilla, or Grilled Chicken.</div>
+    </div>
+
+  </div>
+  <p style="text-align:center; color:rgba(249,244,236,0.35); font-size:0.78rem; margin-top:2.5rem; font-style:italic;">Menu changes regularly — follow on Facebook for weekly specials &amp; features. Call for full current menu: (845) 856-9760</p>
+</section>
+
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header">
+    <p class="section-eyebrow">What People Say</p>
+    <h2 class="section-title">Loved by Port <em>Jervis</em></h2>
+  </div>
+  <div class="rating-showcase">
+    <div class="rating-big">4.4</div>
+    <div class="rating-right">
+      <div class="rating-stars-lg">★★★★☆</div>
+      <div class="rating-count">Based on 1,519+ Google reviews</div>
+      <a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank" style="display:inline-block;margin-top:0.75rem;font-size:0.78rem;color:rgba(249,244,236,0.5);text-decoration:none;">Follow on Facebook for daily specials →</a>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Always fun new items, super affordable, and delicious. Bobby is such a nice guy and the workers dish out the items so quickly. It's a non-negotiable that you must stop by when you're in town. The best way I can describe Ben's is if the best diner you've ever gone to did takeout."</div>
+      <div class="review-author">— Patrick</div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"The menu will blow you away. One thing's for sure, they're very versatile. You'll probably never see some of the meals and shakes they make here, anywhere else. The Chicken Bacon Alfredo Wrap was the best and beastliest wrap I've ever had in my entire life."</div>
+      <div class="review-author">— Xiomara C.</div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Wraps: great. Burgers: great. Cannoli cheesecake parfait: amazing! It's a super homey hometown spot. Great for groups. One friend said since she'd been in New York she hadn't had a satisfying burger yet — but this spot did it!"</div>
+      <div class="review-author">— Jennifer T.</div>
+    </div>
+  </div>
+</section>
+
+<section class="hours-section" id="hours">
+  <div class="hours-inner">
+    <div class="hours-title-block">
+      <p class="section-eyebrow">Find Us</p>
+      <h2 class="section-title">Hours &amp; <em>Location</em></h2>
+      <p class="hours-note">Stop in for a meal or call ahead for pickup. Outdoor seating available in good weather. Wheelchair-accessible entrance and parking.</p>
+      <br>
+      <a href="https://maps.google.com/?q=33+E+Main+St,+Port+Jervis,+NY+12771" target="_blank" class="btn-primary" style="display:inline-block">Get Directions</a>
+    </div>
+    <div>
+      <div class="hours-row">
+        <div class="hours-day">Monday</div>
+        <div class="hours-time">11:00 AM – 10:00 PM</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Tuesday</div>
+        <div class="hours-time">11:00 AM – 10:00 PM</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Wednesday</div>
+        <div class="hours-time">11:00 AM – 10:00 PM</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Thursday</div>
+        <div class="hours-time">11:00 AM – 10:00 PM</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Friday</div>
+        <div class="hours-time hours-late">11:00 AM – 11:00 PM</div>
+      </div>
+      <div class="hours-row">
+        <div class="hours-day">Saturday</div>
+        <div class="hours-time hours-late">11:00 AM – 11:00 PM</div>
+      </div>
+      <div class="hours-row" style="border-bottom:none">
+        <div class="hours-day">Sunday</div>
+        <div class="hours-time">11:00 AM – 10:00 PM</div>
+      </div>
+      <p style="font-size:0.72rem; color:var(--text-muted); margin-top:1rem; font-style:italic;">Hours may vary — call to confirm: <a href="tel:+18458569760" style="color:var(--red)">(845) 856-9760</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="cta-left">
+    <p class="section-eyebrow" style="color:rgba(249,244,236,0.7)">Come Visit</p>
+    <h2 class="section-title">Hungry? Come <em>on in.</em></h2>
+    <p>Whether you're dining in or grabbing takeout, Ben's Fresh is ready to serve you. Follow us on Facebook and Instagram for weekly specials — Chef Bobby is always cooking up something new.</p>
+  </div>
+  <div class="cta-right">
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <div>
+        <div class="contact-label">Address</div>
+        <div class="contact-value"><a href="https://maps.google.com/?q=33+E+Main+St,+Port+Jervis,+NY+12771" target="_blank">33 E Main St, Port Jervis, NY 12771</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📞</div>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value"><a href="tel:+18458569760">(845) 856-9760</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📘</div>
+      <div>
+        <div class="contact-label">Facebook</div>
+        <div class="contact-value"><a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank">facebook.com — Ben's Fresh</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📸</div>
+      <div>
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value"><a href="https://www.instagram.com/bensfresh_portjervis_ny/" target="_blank">@bensfresh_portjervis_ny</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Ben's <span>Fresh</span></div>
+  <div class="footer-text">© 2025 Ben's Fresh · 33 E Main St, Port Jervis, NY 12771</div>
+  <div class="footer-socials">
+    <a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank" class="footer-social" aria-label="Facebook">f</a>
+    <a href="https://www.instagram.com/bensfresh_portjervis_ny/" target="_blank" class="footer-social" aria-label="Instagram">ig</a>
+    <a href="tel:+18458569760" class="footer-social" aria-label="Call Us">☎</a>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.menu-tab');
+  const cards = document.querySelectorAll('.menu-card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      cards.forEach(card => {
+        card.classList.toggle('visible', card.dataset.cat === cat);
+      });
+    });
+  });
+</script>
+</body>
+</html>
