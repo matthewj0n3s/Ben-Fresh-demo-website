@@ -4,38 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ben's Fresh — Port Jervis, NY</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --red: #C8341A; --red-dark: #8B2010;
+    --red: #C8341A; --red-dark: #8B2010; --red-light: #E04530;
     --cream: #F9F4EC; --cream-dark: #EDE5D4;
     --charcoal: #1E1A16; --charcoal-mid: #3A3028;
-    --gold: #D4A444; --text-muted: #7A6A5A;
+    --gold: #D4A444; --gold-light: #F0C060;
+    --text-muted: #7A6A5A;
     --nav-height: 68px;
+    --green: #2A7A4A;
   }
   html { scroll-behavior: smooth; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
 
-  /* ── SCROLL OFFSET FIX for all anchor sections ── */
-  #about, #menu, #reviews, #hours, #contact {
+  #about, #menu, #specials, #reviews, #hours, #contact {
     scroll-margin-top: var(--nav-height);
   }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.2rem 3rem;
     height: var(--nav-height);
-    background: rgba(30,26,22,0.93); backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(212,164,68,0.25);
+    background: rgba(30,26,22,0.95); backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(212,164,68,0.3);
   }
   .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--cream); letter-spacing: -0.02em; }
   .nav-logo span { color: var(--gold); }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
-    color: rgba(249,244,236,0.7); text-decoration: none; font-size: 0.85rem;
+    color: rgba(249,244,236,0.7); text-decoration: none; font-size: 0.82rem;
     font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
     transition: color 0.2s; position: relative; padding-bottom: 2px;
   }
@@ -56,7 +57,6 @@
   .nav-cta:hover { background: var(--red-dark) !important; }
   .nav-cta::after { display: none !important; }
 
-  /* ── HAMBURGER ── */
   .nav-hamburger {
     display: none; flex-direction: column; justify-content: center;
     gap: 5px; background: none; border: none; cursor: pointer;
@@ -71,7 +71,6 @@
   .nav-hamburger.open span:nth-child(2) { opacity: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── MOBILE DRAWER ── */
   .mobile-menu {
     display: none; position: fixed; top: var(--nav-height); left: 0; right: 0;
     background: rgba(30,26,22,0.98); backdrop-filter: blur(12px);
@@ -81,9 +80,7 @@
     transition: transform 0.25s ease, opacity 0.25s ease;
     pointer-events: none;
   }
-  .mobile-menu.open {
-    transform: translateY(0); opacity: 1; pointer-events: all;
-  }
+  .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
   .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
   .mobile-menu ul li a {
     display: block; color: rgba(249,244,236,0.8); text-decoration: none;
@@ -103,81 +100,314 @@
   }
   .mobile-menu-cta:hover { background: var(--red-dark); }
 
-  /* ── HERO ── */
-  .hero { min-height: 100vh; background: var(--charcoal); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
-  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 6rem 5rem; position: relative; z-index: 2; }
-  .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 6rem 5rem; position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
   .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
-  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 900; line-height: 1.0; color: var(--cream); margin-bottom: 1.5rem; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 5.5vw, 5rem);
+    font-weight: 900; line-height: 1.0;
+    color: var(--cream); margin-bottom: 1.5rem;
+  }
   .hero h1 em { font-style: italic; color: var(--gold); }
-  .hero-desc { font-size: 1.05rem; line-height: 1.75; color: rgba(249,244,236,0.65); max-width: 380px; margin-bottom: 3rem; }
+  .hero-desc {
+    font-size: 1.05rem; line-height: 1.75;
+    color: rgba(249,244,236,0.65); max-width: 400px; margin-bottom: 2.5rem;
+  }
   .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn-primary { background: var(--red); color: var(--cream); padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; transition: background 0.2s, transform 0.15s; display: inline-block; }
+  .btn-primary {
+    background: var(--red); color: var(--cream); padding: 0.9rem 2rem;
+    border-radius: 2px; text-decoration: none; font-weight: 500;
+    font-size: 0.9rem; letter-spacing: 0.04em;
+    transition: background 0.2s, transform 0.15s; display: inline-block;
+  }
   .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
-  .btn-outline { border: 1px solid rgba(249,244,236,0.3); color: var(--cream); padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; transition: border-color 0.2s, background 0.2s; }
+  .btn-outline {
+    border: 1px solid rgba(249,244,236,0.3); color: var(--cream);
+    padding: 0.9rem 2rem; border-radius: 2px; text-decoration: none;
+    font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em;
+    transition: border-color 0.2s, background 0.2s;
+  }
   .btn-outline:hover { border-color: var(--gold); background: rgba(212,164,68,0.08); }
-  .hero-stats { display: flex; gap: 2.5rem; margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid rgba(249,244,236,0.1); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2.5rem;
+    border-top: 1px solid rgba(249,244,236,0.1);
+  }
   .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
-  .hero-stat-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(249,244,236,0.45); margin-top: 0.15rem; }
-  .hero-right { position: relative; overflow: hidden; }
-  .hero-right-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,52,26,0.15) 0%, transparent 60%), repeating-linear-gradient(-45deg, rgba(212,164,68,0.03) 0px, rgba(212,164,68,0.03) 1px, transparent 1px, transparent 60px); background-color: #2A2218; }
-  .hero-burger-art { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 340px; height: 340px; }
-  .hero-badge {
-    position: absolute; bottom: 3rem; right: 3rem; width: 110px; height: 110px;
-    border-radius: 50%; background: var(--red);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    animation: spin-slow 20s linear infinite;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero-badge { animation: none; }
-    .hero-badge-inner { animation: none !important; }
-    .marquee-track { animation: none !important; }
-  }
-  .hero-badge-inner { text-align: center; animation: spin-slow 20s linear infinite reverse; }
-  .hero-badge-stars { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; }
-  .hero-badge-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--cream); line-height: 1; }
-  .hero-badge-sub { font-size: 0.6rem; color: rgba(249,244,236,0.8); text-transform: uppercase; letter-spacing: 0.1em; }
-  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .hero-stat-lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(249,244,236,0.45); margin-top: 0.15rem; }
 
-  /* ── MARQUEE ── */
-  .marquee-strip { background: var(--red); padding: 0.75rem 0; overflow: hidden; white-space: nowrap; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); }
+  /* HERO RIGHT - Photo Grid */
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-photo-grid {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+  }
+  .hero-photo-grid .photo-cell {
+    overflow: hidden; position: relative;
+    background: #2A2218;
+  }
+  .hero-photo-grid .photo-cell img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+    filter: brightness(0.85) saturate(1.1);
+  }
+  .hero-photo-grid .photo-cell:hover img { transform: scale(1.05); }
+  .hero-photo-grid .photo-cell::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.5));
+    pointer-events: none;
+  }
+  .hero-photo-grid .photo-cell .photo-label {
+    position: absolute; bottom: 0.75rem; left: 0.75rem; z-index: 2;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem; letter-spacing: 0.08em;
+    color: var(--cream);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .hero-overlay-badge {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90px; height: 90px; border-radius: 50%;
+    background: var(--red);
+    border: 3px solid var(--gold);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .hero-overlay-badge .badge-stars { color: var(--gold); font-size: 0.55rem; letter-spacing: 2px; }
+  .hero-overlay-badge .badge-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--cream); line-height: 1; }
+  .hero-overlay-badge .badge-sub { font-size: 0.5rem; color: rgba(249,244,236,0.8); text-transform: uppercase; letter-spacing: 0.1em; }
+  .hero-right-overlay {
+    position: absolute; inset: 0; pointer-events: none; z-index: 5;
+    background: linear-gradient(to right, rgba(30,26,22,0.25) 0%, transparent 30%);
+  }
+
+  /* MARQUEE */
+  .marquee-strip {
+    background: var(--red); padding: 0.75rem 0; overflow: hidden; white-space: nowrap;
+    border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold);
+  }
   .marquee-track { display: inline-flex; animation: marquee 35s linear infinite; }
-  .marquee-item { display: inline-flex; align-items: center; gap: 1.5rem; padding: 0 2rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 1.5rem; padding: 0 2rem;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--cream);
+  }
   .marquee-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-  /* ── ABOUT ── */
-  .about { display: grid; grid-template-columns: 1fr 1fr; }
-  .about-visual { background: var(--charcoal-mid); display: flex; align-items: center; justify-content: center; padding: 6rem 4rem; position: relative; overflow: hidden; }
-  .about-visual::before { content: ''; position: absolute; top: -40%; left: -20%; width: 300px; height: 300px; border-radius: 50%; background: rgba(200,52,26,0.15); }
-  .about-grid-art { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 340px; }
-  .about-grid-card { background: rgba(249,244,236,0.06); border: 1px solid rgba(212,164,68,0.2); border-radius: 4px; padding: 1.5rem 1.25rem; text-align: center; }
-  .about-grid-card.accent { background: var(--red); border-color: var(--red); }
-  .about-grid-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-  .about-grid-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(249,244,236,0.6); }
-  .about-grid-card.accent .about-grid-lbl { color: rgba(249,244,236,0.85); }
-  .about-content { padding: 6rem 5rem; background: var(--cream); display: flex; flex-direction: column; justify-content: center; }
-  .section-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  /* FEATURED SPECIALS SECTION */
+  .specials-section {
+    background: var(--charcoal);
+    padding: 7rem 5rem;
+  }
+  .specials-header { text-align: center; margin-bottom: 3.5rem; }
+  .specials-header .section-eyebrow { justify-content: center; }
+  .specials-header .section-eyebrow::before { display: none; }
+  .specials-header .section-title { color: var(--cream); }
+  .section-eyebrow {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--red); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
   .section-eyebrow::before { content: ''; display: block; width: 24px; height: 1.5px; background: var(--red); }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem;
+  }
   .section-title em { font-style: italic; color: var(--red); }
+
+  .specials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .special-card {
+    border-radius: 4px; overflow: hidden;
+    background: rgba(249,244,236,0.04);
+    border: 1px solid rgba(249,244,236,0.1);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+  }
+  .special-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212,164,68,0.5);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .special-card-img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: brightness(0.9) saturate(1.15);
+    transition: filter 0.3s ease;
+  }
+  .special-card:hover .special-card-img { filter: brightness(1) saturate(1.2); }
+  .special-card-img-placeholder {
+    width: 100%; aspect-ratio: 4/3;
+    background: var(--charcoal-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    border-bottom: 1px solid rgba(212,164,68,0.2);
+  }
+  .special-card-body { padding: 1.4rem 1.5rem 1.6rem; }
+  .special-tag {
+    display: inline-block; font-size: 0.6rem; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 2px;
+    margin-bottom: 0.6rem;
+    background: rgba(200,52,26,0.3); color: rgba(249,244,236,0.9);
+  }
+  .special-tag.gold { background: rgba(212,164,68,0.25); color: var(--gold); }
+  .special-card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.45rem; letter-spacing: 0.05em;
+    color: var(--cream); margin-bottom: 0.5rem; line-height: 1.1;
+  }
+  .special-card-desc { font-size: 0.84rem; line-height: 1.65; color: rgba(249,244,236,0.55); }
+  .special-card-price {
+    display: inline-block; margin-top: 0.85rem;
+    font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* Wide special card */
+  .special-card-wide {
+    grid-column: span 2;
+    display: grid; grid-template-columns: 1.2fr 1fr;
+  }
+  .special-card-wide .special-card-img,
+  .special-card-wide .special-card-img-placeholder {
+    aspect-ratio: auto; height: 100%; min-height: 260px;
+    border-bottom: none; border-right: 1px solid rgba(212,164,68,0.2);
+  }
+  .special-card-wide .special-card-body {
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .special-card-wide .special-card-name { font-size: 1.8rem; }
+
+  /* ABOUT */
+  .about { display: grid; grid-template-columns: 1fr 1fr; }
+  .about-visual { background: var(--charcoal-mid); display: flex; flex-direction: column; overflow: hidden; }
+  .about-photo-main {
+    flex: 1; position: relative; overflow: hidden; min-height: 300px;
+  }
+  .about-photo-main img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    filter: brightness(0.88) saturate(1.1);
+  }
+  .about-photo-main .about-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(30,26,22,0.6) 0%, transparent 50%);
+  }
+  .about-photo-strip {
+    display: grid; grid-template-columns: 1fr 1fr; flex-shrink: 0;
+  }
+  .about-photo-strip-cell {
+    aspect-ratio: 1; overflow: hidden; position: relative;
+  }
+  .about-photo-strip-cell img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.8) saturate(1.1);
+    transition: filter 0.3s;
+  }
+  .about-photo-strip-cell:hover img { filter: brightness(1) saturate(1.2); }
+
+  .photo-placeholder {
+    width: 100%; height: 100%; min-height: 200px;
+    background: var(--charcoal-mid);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; color: rgba(249,244,236,0.3);
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em;
+  }
+  .photo-placeholder-icon { font-size: 2.5rem; opacity: 0.4; }
+
+  .about-content {
+    padding: 6rem 5rem; background: var(--cream);
+    display: flex; flex-direction: column; justify-content: center;
+  }
   .about-body { font-size: 1rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 1rem; }
   .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem; }
-  .info-card { padding: 1.25rem; background: var(--cream-dark); border-radius: 4px; border-left: 3px solid var(--gold); }
+  .info-card {
+    padding: 1.25rem; background: var(--cream-dark);
+    border-radius: 4px; border-left: 3px solid var(--gold);
+  }
   .info-card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 0.35rem; }
   .info-card-value { font-size: 0.95rem; font-weight: 500; color: var(--charcoal); line-height: 1.45; }
 
-  /* ── MENU ── */
-  .menu-section { background: var(--charcoal); padding: 8rem 5rem; }
+  /* PHOTO WALL STRIP */
+  .photo-wall {
+    background: var(--charcoal);
+    overflow: hidden;
+    height: 280px;
+    display: flex;
+    gap: 3px;
+  }
+  .photo-wall-cell {
+    flex: 1; overflow: hidden; position: relative;
+    min-width: 0;
+  }
+  .photo-wall-cell img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease, filter 0.3s ease;
+    filter: brightness(0.75) saturate(1.1);
+  }
+  .photo-wall-cell:hover img { transform: scale(1.06); filter: brightness(1) saturate(1.3); }
+  .photo-wall-cell .wall-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1rem 0.75rem 0.75rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.95rem; letter-spacing: 0.08em; color: var(--cream);
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .photo-wall-cell:hover .wall-label { opacity: 1; }
+  .photo-wall-placeholder {
+    width: 100%; height: 100%;
+    background: rgba(249,244,236,0.04);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; color: rgba(249,244,236,0.15);
+  }
+
+  /* MENU */
+  .menu-section { background: var(--charcoal); padding: 7rem 5rem; }
   .menu-header { text-align: center; margin-bottom: 4rem; }
   .menu-header .section-eyebrow { justify-content: center; }
   .menu-header .section-eyebrow::before { display: none; }
   .menu-header .section-title { color: var(--cream); }
   .menu-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
-  .menu-tab { padding: 0.5rem 1.4rem; border-radius: 2px; background: transparent; border: 1px solid rgba(249,244,236,0.2); color: rgba(249,244,236,0.6); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
+  .menu-tab {
+    padding: 0.5rem 1.4rem; border-radius: 2px; background: transparent;
+    border: 1px solid rgba(249,244,236,0.2); color: rgba(249,244,236,0.6);
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+  }
   .menu-tab.active, .menu-tab:hover { background: var(--red); border-color: var(--red); color: var(--cream); }
   .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .menu-card { background: rgba(249,244,236,0.04); border: 1px solid rgba(249,244,236,0.08); border-radius: 4px; padding: 1.75rem; transition: border-color 0.2s, background 0.2s; display: none; }
+  .menu-card {
+    background: rgba(249,244,236,0.04); border: 1px solid rgba(249,244,236,0.08);
+    border-radius: 4px; padding: 1.75rem;
+    transition: border-color 0.2s, background 0.2s; display: none;
+  }
   .menu-card.visible { display: block; }
   .menu-card:hover { border-color: rgba(212,164,68,0.35); background: rgba(249,244,236,0.06); }
   .menu-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
@@ -186,59 +416,81 @@
   .menu-badge { display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 0.5rem; background: rgba(200,52,26,0.3); color: rgba(249,244,236,0.9); }
   .menu-card-subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(212,164,68,0.7); margin-bottom: 0.75rem; }
 
-  /* ── REVIEWS ── */
-  .reviews-section { background: var(--cream-dark); padding: 8rem 5rem; }
+  /* REVIEWS */
+  .reviews-section { background: var(--cream-dark); padding: 7rem 5rem; }
   .reviews-header { text-align: center; margin-bottom: 4rem; }
   .reviews-header .section-eyebrow { justify-content: center; }
   .reviews-header .section-eyebrow::before { display: none; }
   .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .review-card { background: var(--cream); border: 1px solid rgba(30,26,22,0.08); border-radius: 4px; padding: 2rem; position: relative; }
+  .review-card {
+    background: var(--cream); border: 1px solid rgba(30,26,22,0.08);
+    border-radius: 4px; padding: 2rem; position: relative;
+  }
   .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
   .review-text { font-size: 0.95rem; line-height: 1.75; color: var(--charcoal); margin-bottom: 1.5rem; font-style: italic; }
   .review-author { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
   .review-quote-mark { position: absolute; top: 1.25rem; right: 1.5rem; font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: rgba(200,52,26,0.08); line-height: 1; }
-  .rating-showcase { display: flex; align-items: center; justify-content: center; gap: 3rem; margin-bottom: 4rem; padding: 2.5rem; background: var(--charcoal); border-radius: 4px; }
+  .rating-showcase {
+    display: flex; align-items: center; justify-content: center; gap: 3rem;
+    margin-bottom: 4rem; padding: 2.5rem;
+    background: var(--charcoal); border-radius: 4px;
+  }
   .rating-big { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--gold); line-height: 1; }
   .rating-right { border-left: 1px solid rgba(249,244,236,0.15); padding-left: 2.5rem; }
   .rating-stars-lg { color: var(--gold); font-size: 1.2rem; letter-spacing: 3px; }
   .rating-count { font-size: 0.85rem; color: rgba(249,244,236,0.5); margin-top: 0.5rem; }
 
-  /* ── CTA / CONTACT ── */
-  .cta-section { background: var(--red); padding: 8rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-  .cta-left .section-title { color: var(--cream); margin-bottom: 1.25rem; }
-  .cta-left .section-title em { color: var(--gold); }
-  .cta-left p { color: rgba(249,244,236,0.75); line-height: 1.75; font-size: 1rem; }
-  .cta-right { display: flex; flex-direction: column; gap: 1.5rem; }
-  .contact-item { display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.5rem; background: rgba(249,244,236,0.1); border-radius: 4px; border: 1px solid rgba(249,244,236,0.15); }
-  .contact-icon { width: 44px; height: 44px; border-radius: 50%; background: rgba(249,244,236,0.15); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-  .contact-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(249,244,236,0.55); margin-bottom: 0.25rem; }
-  .contact-value { font-size: 0.95rem; font-weight: 500; color: var(--cream); }
-  .contact-value a { color: inherit; text-decoration: none; }
-  .contact-value a:hover { text-decoration: underline; }
-
-  /* ── HOURS ── */
-  .hours-section { background: var(--cream); padding: 8rem 5rem; }
+  /* HOURS */
+  .hours-section { background: var(--cream); padding: 7rem 5rem; }
   .hours-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
   .hours-title-block .section-title { margin-bottom: 1.5rem; }
   .hours-note { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
   .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; border-bottom: 1px solid var(--cream-dark); }
   .hours-row.today { background: rgba(200,52,26,0.05); margin: 0 -0.5rem; padding-left: 0.5rem; padding-right: 0.5rem; border-radius: 3px; }
   .hours-row.today .hours-day { color: var(--red); font-weight: 700; }
-  .hours-row.today .hours-day::after { content: ' ← Today'; font-size: 0.65rem; font-weight: 500; color: var(--red); opacity: 0.7; letter-spacing: 0.08em; }
+  .hours-row.today .hours-day::after { content: ' \2190 Today'; font-size: 0.65rem; font-weight: 500; color: var(--red); opacity: 0.7; letter-spacing: 0.08em; }
   .hours-day { font-size: 0.85rem; font-weight: 500; color: var(--charcoal); }
-  .hours-time { font-size: 0.85rem; color: #2A7A4A; font-weight: 500; }
+  .hours-time { font-size: 0.85rem; color: var(--green); font-weight: 500; }
   .hours-late { color: #1A5A9A; }
 
-  /* ── FOOTER ── */
-  footer { background: var(--charcoal); padding: 3rem 5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212,164,68,0.2); }
+  /* CTA / CONTACT */
+  .cta-section {
+    background: var(--red); padding: 7rem 5rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+  }
+  .cta-left .section-title { color: var(--cream); margin-bottom: 1.25rem; }
+  .cta-left .section-title em { color: var(--gold); }
+  .cta-left p { color: rgba(249,244,236,0.75); line-height: 1.75; font-size: 1rem; }
+  .cta-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.5rem;
+    background: rgba(249,244,236,0.1); border-radius: 4px; border: 1px solid rgba(249,244,236,0.15);
+  }
+  .contact-icon { width: 44px; height: 44px; border-radius: 50%; background: rgba(249,244,236,0.15); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .contact-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(249,244,236,0.55); margin-bottom: 0.25rem; }
+  .contact-value { font-size: 0.95rem; font-weight: 500; color: var(--cream); }
+  .contact-value a { color: inherit; text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal); padding: 3rem 5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(212,164,68,0.2);
+  }
   .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--cream); }
   .footer-logo span { color: var(--gold); }
   .footer-text { font-size: 0.8rem; color: rgba(249,244,236,0.4); }
   .footer-socials { display: flex; gap: 1rem; }
-  .footer-social { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(249,244,236,0.2); display: flex; align-items: center; justify-content: center; color: rgba(249,244,236,0.5); text-decoration: none; font-size: 0.8rem; transition: border-color 0.2s, color 0.2s; }
+  .footer-social {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(249,244,236,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(249,244,236,0.5); text-decoration: none; font-size: 0.8rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
   .footer-social:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* ── BACK TO TOP ── */
+  /* BACK TO TOP */
   .back-to-top {
     position: fixed; bottom: 2rem; right: 2rem; z-index: 90;
     width: 44px; height: 44px; border-radius: 50%;
@@ -253,9 +505,51 @@
   .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
   .back-to-top:hover { background: var(--red-dark); }
 
-  /* ── RESPONSIVE ── */
+  /* INSTAGRAM STRIP */
+  .instagram-strip {
+    background: var(--charcoal-mid);
+    padding: 3rem 5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    border-top: 1px solid rgba(212,164,68,0.2);
+    border-bottom: 1px solid rgba(212,164,68,0.2);
+  }
+  .instagram-text { flex-shrink: 0; }
+  .instagram-text p { color: rgba(249,244,236,0.5); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.35rem; }
+  .instagram-text a { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--cream); text-decoration: none; }
+  .instagram-text a:hover { color: var(--gold); }
+  .instagram-scroll {
+    display: flex; gap: 0.75rem; overflow-x: auto;
+    scrollbar-width: none; -ms-overflow-style: none; flex: 1;
+  }
+  .instagram-scroll::-webkit-scrollbar { display: none; }
+  .instagram-thumb {
+    flex-shrink: 0; width: 130px; height: 130px; border-radius: 4px;
+    overflow: hidden; position: relative; cursor: pointer;
+  }
+  .instagram-thumb img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    filter: brightness(0.8) saturate(1.15);
+    transition: filter 0.25s, transform 0.4s;
+  }
+  .instagram-thumb:hover img { filter: brightness(1) saturate(1.3); transform: scale(1.06); }
+  .instagram-thumb-placeholder {
+    width: 100%; height: 100%; background: rgba(249,244,236,0.05);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; color: rgba(249,244,236,0.2);
+    border: 1px solid rgba(249,244,236,0.1); border-radius: 4px;
+  }
+
+  .owner-note {
+    background: var(--charcoal); color: rgba(249,244,236,0.35);
+    font-size: 0.72rem; text-align: center; padding: 0.75rem 2rem;
+    font-style: italic; letter-spacing: 0.04em;
+  }
+
+  /* RESPONSIVE */
   @media (max-width: 1100px) {
     .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .specials-grid { grid-template-columns: 1fr 1fr; }
+    .special-card-wide { grid-column: span 2; }
   }
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
@@ -263,18 +557,25 @@
     .nav-hamburger { display: flex; }
     .mobile-menu { display: block; }
     .hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 8rem 2rem 5rem; }
+    .hero-right { height: 55vw; max-height: 420px; }
+    .hero-left { padding: 8rem 2rem 4rem; }
     .about { grid-template-columns: 1fr; }
-    .about-visual { display: none; }
+    .about-visual { max-height: 420px; }
     .about-content { padding: 4rem 2rem; }
-    .menu-section, .reviews-section, .cta-section, .hours-section { padding: 5rem 2rem; }
-    .menu-grid { grid-template-columns: 1fr; }
+    .menu-section, .reviews-section, .cta-section, .hours-section, .specials-section { padding: 5rem 2rem; }
+    .menu-grid, .specials-grid { grid-template-columns: 1fr; }
+    .special-card-wide { grid-column: span 1; grid-template-columns: 1fr; }
+    .special-card-wide .special-card-img, .special-card-wide .special-card-img-placeholder { height: 220px; border-right: none; border-bottom: 1px solid rgba(212,164,68,0.2); }
     .reviews-grid { grid-template-columns: 1fr; }
     .hours-inner { grid-template-columns: 1fr; gap: 3rem; }
     .cta-section { grid-template-columns: 1fr; gap: 3rem; }
+    .photo-wall { height: 180px; }
     footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+    .instagram-strip { flex-direction: column; align-items: flex-start; padding: 2rem; }
     .back-to-top { bottom: 1.5rem; right: 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
   }
 </style>
 </head>
@@ -284,6 +585,7 @@
   <div class="nav-logo">Ben's <span>Fresh</span></div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#specials">Specials</a></li>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#hours">Hours</a></li>
@@ -294,10 +596,10 @@
   </button>
 </nav>
 
-<!-- Mobile drawer -->
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <ul>
     <li><a href="#about">About</a></li>
+    <li><a href="#specials">Specials</a></li>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#hours">Hours</a></li>
@@ -305,18 +607,19 @@
   <a href="#contact" class="mobile-menu-cta">Visit Us</a>
 </div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">Port Jervis, New York · Since 2016</p>
-    <h1>Fresh. <em>Bold.</em> Done Right.</h1>
-    <p class="hero-desc">Burgers, hot dogs, comfort food, ice cream and desserts — all made fresh daily by Chef Bobby and crew. A Port Jervis staple since 2016.</p>
+    <p class="hero-eyebrow">Port Jervis, New York &middot; Since 2016</p>
+    <h1>Fresh. <em>Bold.</em><br>Done Right.</h1>
+    <p class="hero-desc">Burgers, hot dogs, quesadillas, ice cream and wild desserts &mdash; made fresh daily by Chef Bobby and crew. Port Jervis&rsquo; favorite spot since 2016.</p>
     <div class="hero-actions">
       <a href="#menu" class="btn-primary">View Our Menu</a>
       <a href="tel:+18458569760" class="btn-outline">Call to Order</a>
     </div>
     <div class="hero-stats">
       <div>
-        <div class="hero-stat-num">4.4★</div>
+        <div class="hero-stat-num">4.4&#9733;</div>
         <div class="hero-stat-lbl">Google Rating</div>
       </div>
       <div>
@@ -324,37 +627,41 @@
         <div class="hero-stat-lbl">Reviews</div>
       </div>
       <div>
-        <div class="hero-stat-num">Since '16</div>
+        <div class="hero-stat-num">Since &rsquo;16</div>
         <div class="hero-stat-lbl">Port Jervis Staple</div>
       </div>
     </div>
   </div>
+
   <div class="hero-right">
-    <div class="hero-right-bg"></div>
-    <svg class="hero-burger-art" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="170" cy="100" rx="120" ry="70" fill="#C8341A" opacity="0.9"/>
-      <ellipse cx="170" cy="100" rx="100" ry="52" fill="#D4A444" opacity="0.6"/>
-      <ellipse cx="140" cy="82" rx="8" ry="5" fill="#F9F4EC" opacity="0.5" transform="rotate(-20 140 82)"/>
-      <ellipse cx="175" cy="72" rx="8" ry="5" fill="#F9F4EC" opacity="0.5" transform="rotate(10 175 72)"/>
-      <ellipse cx="208" cy="85" rx="7" ry="4.5" fill="#F9F4EC" opacity="0.5" transform="rotate(-10 208 85)"/>
-      <path d="M55 155 Q90 135 130 150 Q155 138 170 152 Q195 136 220 150 Q255 138 285 155 Q280 168 255 170 Q220 158 200 168 Q185 158 170 167 Q155 157 140 167 Q115 158 85 170 Q60 168 55 155Z" fill="#3A7A2A" opacity="0.85"/>
-      <ellipse cx="170" cy="178" rx="108" ry="14" fill="#C8341A" opacity="0.7"/>
-      <path d="M55 192 L285 192 L295 205 L285 218 L55 218 L45 205 Z" fill="#D4A444" opacity="0.8"/>
-      <ellipse cx="170" cy="232" rx="115" ry="22" fill="#3A2818" opacity="0.95"/>
-      <ellipse cx="170" cy="226" rx="115" ry="20" fill="#5A3820"/>
-      <ellipse cx="170" cy="255" rx="120" ry="28" fill="#D4A444" opacity="0.9"/>
-      <ellipse cx="170" cy="275" rx="118" ry="16" fill="#C8341A" opacity="0.5"/>
-    </svg>
-    <div class="hero-badge">
-      <div class="hero-badge-inner">
-        <div class="hero-badge-stars">★★★★</div>
-        <div class="hero-badge-num">4.4</div>
-        <div class="hero-badge-sub">Rated</div>
+    <div class="hero-right-overlay"></div>
+    <div class="hero-photo-grid">
+      <div class="photo-cell">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#3A2010,#5A3020);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">&#127828;</div>
+        <div class="photo-label">Benny Burger</div>
       </div>
+      <div class="photo-cell">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#1A3A20,#2A5A30);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">&#127831;</div>
+        <div class="photo-label">Fresh Chicken</div>
+      </div>
+      <div class="photo-cell">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#3A2820,#6A4820);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">&#127790;</div>
+        <div class="photo-label">Quesadillas</div>
+      </div>
+      <div class="photo-cell">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#201828,#3A2850);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">&#127846;</div>
+        <div class="photo-label">Ice Cream</div>
+      </div>
+    </div>
+    <div class="hero-overlay-badge">
+      <div class="badge-stars">&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="badge-num">4.4</div>
+      <div class="badge-sub">Rated</div>
     </div>
   </div>
 </section>
 
+<!-- MARQUEE -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
     <span class="marquee-item"><span class="marquee-dot"></span>Burgers</span>
@@ -365,6 +672,8 @@
     <span class="marquee-item"><span class="marquee-dot"></span>Desserts</span>
     <span class="marquee-item"><span class="marquee-dot"></span>Fresh Daily</span>
     <span class="marquee-item"><span class="marquee-dot"></span>Port Jervis NY</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>NBA Finals Specials</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Benny Box $12.95</span>
     <span class="marquee-item"><span class="marquee-dot"></span>Burgers</span>
     <span class="marquee-item"><span class="marquee-dot"></span>Hot Dogs</span>
     <span class="marquee-item"><span class="marquee-dot"></span>Ice Cream</span>
@@ -373,34 +682,41 @@
     <span class="marquee-item"><span class="marquee-dot"></span>Desserts</span>
     <span class="marquee-item"><span class="marquee-dot"></span>Fresh Daily</span>
     <span class="marquee-item"><span class="marquee-dot"></span>Port Jervis NY</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>NBA Finals Specials</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Benny Box $12.95</span>
   </div>
 </div>
 
+<!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-visual">
-    <div class="about-grid-art">
-      <div class="about-grid-card">
-        <div class="about-grid-icon">🍔</div>
-        <div class="about-grid-lbl">Burgers</div>
+    <div class="about-photo-main">
+      <div class="photo-placeholder" style="min-height:380px;">
+        <div class="photo-placeholder-icon">&#128248;</div>
+        <span>Add your best food photo here</span>
+        <span style="font-size:0.6rem;opacity:0.6;">Replace this div with &lt;img src="photo.jpg"&gt;</span>
       </div>
-      <div class="about-grid-card">
-        <div class="about-grid-icon">🍦</div>
-        <div class="about-grid-lbl">Ice Cream</div>
+      <div class="about-photo-overlay"></div>
+    </div>
+    <div class="about-photo-strip">
+      <div class="about-photo-strip-cell">
+        <div class="photo-placeholder" style="min-height:160px;">
+          <div class="photo-placeholder-icon">&#127846;</div>
+          <span>Ice Cream</span>
+        </div>
       </div>
-      <div class="about-grid-card accent">
-        <div class="about-grid-icon">🌯</div>
-        <div class="about-grid-lbl">Wraps</div>
-      </div>
-      <div class="about-grid-card">
-        <div class="about-grid-icon">🌮</div>
-        <div class="about-grid-lbl">Quesadillas</div>
+      <div class="about-photo-strip-cell">
+        <div class="photo-placeholder" style="min-height:160px;">
+          <div class="photo-placeholder-icon">&#127828;</div>
+          <span>Burgers</span>
+        </div>
       </div>
     </div>
   </div>
   <div class="about-content">
     <p class="section-eyebrow">Our Story</p>
     <h2 class="section-title">Real food, made <em>fresh</em> every day</h2>
-    <p class="about-body">Ben's Fresh has been proudly serving Port Jervis since 2016. Chef Bobby and the crew are committed to delivering the freshest ingredients and continually creating new and exciting specials. The menu is big, bold, and constantly evolving — burgers, hot dogs, comfort food, creative wraps, quesadillas, ice cream, and some of the most unique desserts you'll find anywhere.</p>
+    <p class="about-body">Ben's Fresh has been proudly serving Port Jervis since 2016. Chef Bobby and the crew are committed to delivering the freshest ingredients and continually creating new and exciting specials. The menu is big, bold, and constantly evolving &mdash; burgers, hot dogs, comfort food, creative wraps, quesadillas, ice cream, and some of the most unique desserts you'll find anywhere.</p>
     <p class="about-body">Outdoor seating, a large parking lot, a kids' menu, and a welcoming family atmosphere make it a must-stop whether you're a local or just passing through on I-84.</p>
     <div class="info-grid">
       <div class="info-card">
@@ -423,6 +739,140 @@
   </div>
 </section>
 
+<!-- PHOTO WALL STRIP -->
+<div class="photo-wall">
+  <div class="photo-wall-cell">
+    <div class="photo-wall-placeholder">&#127828;</div>
+    <div class="wall-label">Benny Burger</div>
+  </div>
+  <div class="photo-wall-cell">
+    <div class="photo-wall-placeholder">&#127790;</div>
+    <div class="wall-label">Samurai Quesadilla</div>
+  </div>
+  <div class="photo-wall-cell">
+    <div class="photo-wall-placeholder">&#127831;</div>
+    <div class="wall-label">Chicken &amp; Waffles</div>
+  </div>
+  <div class="photo-wall-cell">
+    <div class="photo-wall-placeholder">&#127839;</div>
+    <div class="wall-label">Fresh Cut Fries</div>
+  </div>
+  <div class="photo-wall-cell">
+    <div class="photo-wall-placeholder">&#127846;</div>
+    <div class="wall-label">Ice Cream Parfaits</div>
+  </div>
+  <div class="photo-wall-cell">
+    <div class="photo-wall-placeholder">&#129361;</div>
+    <div class="wall-label">Funnel Cake Fries</div>
+  </div>
+</div>
+
+<!-- FEATURED SPECIALS -->
+<section class="specials-section" id="specials">
+  <div class="specials-header">
+    <p class="section-eyebrow" style="color:var(--gold);justify-content:center;">
+      <span style="display:inline-block;width:24px;height:1.5px;background:var(--gold);vertical-align:middle;margin-right:0.75rem;"></span>
+      Chef's Current Specials
+    </p>
+    <h2 class="section-title" style="color:var(--cream);">What's <em style="color:var(--gold);">Hot</em> Right Now</h2>
+    <p style="color:rgba(249,244,236,0.45);font-size:0.88rem;margin-top:-0.75rem;">Chef Bobby drops new specials weekly &mdash; follow on Instagram to stay in the loop</p>
+  </div>
+
+  <div class="specials-grid">
+    <div class="special-card special-card-wide">
+      <div class="special-card-img-placeholder">&#127828;</div>
+      <div class="special-card-body">
+        <span class="special-tag gold">&#128293; Best Value</span>
+        <div class="special-card-name">The Benny Box</div>
+        <div class="special-card-desc">A Benny Burger with fresh cut fries, 2-piece crispy chicken, Benny Sauce, and a drink. A full meal in one box &mdash; lunch or dinner, it's a no-brainer.</div>
+        <span class="special-card-price">$12.95</span>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-img-placeholder">&#127936;</div>
+      <div class="special-card-body">
+        <span class="special-tag">NBA Finals Special</span>
+        <div class="special-card-name">Big Knick Energy Burger</div>
+        <div class="special-card-desc">The ultimate game-day burger, built bold and stacked high. Crispy chicken, fresh toppings, and pure Knicks energy. Go NY!</div>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-img-placeholder">&#9876;&#65039;</div>
+      <div class="special-card-body">
+        <span class="special-tag gold">New</span>
+        <div class="special-card-name">Samurai Quesadilla</div>
+        <div class="special-card-desc">Bang Bang Chicken &amp; Shrimp tossed in house Bang Bang Sauce, melty cheese, red onion, and banana peppers. A flavor-bomb quesadilla unlike anything else.</div>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-img-placeholder">&#129312;</div>
+      <div class="special-card-body">
+        <span class="special-tag">Fan Favorite</span>
+        <div class="special-card-name">The Gunslinger</div>
+        <div class="special-card-desc">Crispy chicken, bacon, cheddar, mozzarella, diced jalape&ntilde;os, beer-battered onion rings, and a zesty BBQ ranch sauce. One shot, maximum flavor.</div>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-img-placeholder">&#127942;</div>
+      <div class="special-card-body">
+        <span class="special-tag">NBA Finals Special</span>
+        <div class="special-card-name">Brunson Crunch Parfait</div>
+        <div class="special-card-desc">A championship-worthy ice cream parfait loaded with crunch, toppings, and Knicks pride. Orange and blue never tasted so good.</div>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-img-placeholder">2&#65039;&#8419;</div>
+      <div class="special-card-body">
+        <span class="special-tag gold">Weekly Deal</span>
+        <div class="special-card-name">Two for Tuesday</div>
+        <div class="special-card-desc">Every Tuesday: 2 Benny Burgers for a deal price. Bring a friend, double your order, or just eat like royalty. Check Instagram every week for the full breakdown.</div>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-img-placeholder">&#127831;</div>
+      <div class="special-card-body">
+        <span class="special-tag">NBA Finals Special</span>
+        <div class="special-card-name">Chicken Meal Deal</div>
+        <div class="special-card-desc">10 fresh-fried chicken tenders, large fries, and your choice of onion rings or mozzarella sticks. Built for game night, priced for the whole squad.</div>
+        <span class="special-card-price">$26</span>
+      </div>
+    </div>
+
+    <div class="special-card">
+      <div class="special-card-img-placeholder">&#129385;</div>
+      <div class="special-card-body">
+        <span class="special-tag gold">New Side</span>
+        <div class="special-card-name">Dill Pickle Pasta Salad</div>
+        <div class="special-card-desc">A refreshing, tangy pasta salad loaded with dill pickle flavor. Chef Bobby keeps the sides interesting &mdash; this one's a sleeper hit.</div>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;color:rgba(249,244,236,0.3);font-size:0.78rem;margin-top:2.5rem;font-style:italic;">Specials change weekly. Follow <a href="https://www.instagram.com/bensfresh_portjervis_ny/" target="_blank" style="color:var(--gold);text-decoration:none;">@bensfresh_portjervis_ny</a> for the latest.</p>
+</section>
+
+<!-- INSTAGRAM STRIP -->
+<div class="instagram-strip">
+  <div class="instagram-text">
+    <p>Follow for weekly specials</p>
+    <a href="https://www.instagram.com/bensfresh_portjervis_ny/" target="_blank">@bensfresh_portjervis_ny</a>
+  </div>
+  <div class="instagram-scroll">
+    <div class="instagram-thumb"><div class="instagram-thumb-placeholder">&#127828;</div></div>
+    <div class="instagram-thumb"><div class="instagram-thumb-placeholder">&#127790;</div></div>
+    <div class="instagram-thumb"><div class="instagram-thumb-placeholder">&#127831;</div></div>
+    <div class="instagram-thumb"><div class="instagram-thumb-placeholder">&#127846;</div></div>
+    <div class="instagram-thumb"><div class="instagram-thumb-placeholder">&#127839;</div></div>
+    <div class="instagram-thumb"><div class="instagram-thumb-placeholder">&#129361;</div></div>
+  </div>
+</div>
+
+<!-- MENU -->
 <section class="menu-section" id="menu">
   <div class="menu-header">
     <p class="section-eyebrow">What We Serve</p>
@@ -437,11 +887,10 @@
     <button class="menu-tab" data-cat="kids">Kids Menu</button>
   </div>
   <div class="menu-grid">
-    <!-- TOP SELLERS -->
     <div class="menu-card visible" data-cat="topSellers">
       <div class="menu-badge">Most Ordered</div>
       <div class="menu-card-top"><div class="menu-card-name">Benny Burger Combo</div></div>
-      <div class="menu-card-desc">100% pure fresh beef, custom ground, cooked fresh to order on a non-GMO toasted potato bun. Includes fries &amp; drink. Add ketchup, pickle, mustard, onion, mayo, or Benny Sauce — free!</div>
+      <div class="menu-card-desc">100% pure fresh beef, custom ground, cooked fresh to order on a non-GMO toasted potato bun. Includes fries &amp; drink. Add ketchup, pickle, mustard, onion, mayo, or Benny Sauce &mdash; free!</div>
     </div>
     <div class="menu-card visible" data-cat="topSellers">
       <div class="menu-badge">Fan Favorite</div>
@@ -458,11 +907,11 @@
     </div>
     <div class="menu-card visible" data-cat="topSellers">
       <div class="menu-card-top"><div class="menu-card-name">Chicken &amp; Waffles</div></div>
-      <div class="menu-card-desc">A comfort food favorite — crispy chicken paired with golden waffles. One of the chef's signature dishes.</div>
+      <div class="menu-card-desc">A comfort food favorite &mdash; crispy chicken paired with golden waffles. One of the chef's signature dishes.</div>
     </div>
     <div class="menu-card visible" data-cat="topSellers">
       <div class="menu-card-top"><div class="menu-card-name">Philly Cheesesteak Wrap</div></div>
-      <div class="menu-card-desc">Shredded steak loaded into a wrap. Reviews rave about it — one of the most talked-about items on the menu.</div>
+      <div class="menu-card-desc">Shredded steak loaded into a wrap. Reviews rave about it &mdash; one of the most talked-about items on the menu.</div>
     </div>
     <div class="menu-card visible" data-cat="topSellers">
       <div class="menu-card-top"><div class="menu-card-name">Grilled Cheese Combo</div></div>
@@ -476,7 +925,6 @@
       <div class="menu-card-top"><div class="menu-card-name">Crispy Chicken Mac &amp; Cheese Melt</div></div>
       <div class="menu-card-desc">Crispy chicken meets creamy mac and cheese in one glorious melt. A Ben's Fresh original.</div>
     </div>
-    <!-- STARTERS -->
     <div class="menu-card" data-cat="starters">
       <div class="menu-card-top"><div class="menu-card-name">Mozzarella Sticks</div></div>
       <div class="menu-card-desc">Golden, gooey, and perfectly fried. A classic starter done right.</div>
@@ -488,21 +936,20 @@
     </div>
     <div class="menu-card" data-cat="starters">
       <div class="menu-card-top"><div class="menu-card-name">Fried Cheese Curds</div></div>
-      <div class="menu-card-desc">Irresistible fried cheese curds — melty inside, crispy outside.</div>
+      <div class="menu-card-desc">Irresistible fried cheese curds &mdash; melty inside, crispy outside.</div>
     </div>
     <div class="menu-card" data-cat="starters">
-      <div class="menu-card-top"><div class="menu-card-name">Jalapeño Cheddar Bites</div></div>
-      <div class="menu-card-desc">Spicy jalapeño meets sharp cheddar in a perfectly fried bite.</div>
+      <div class="menu-card-top"><div class="menu-card-name">Jalape&ntilde;o Cheddar Bites</div></div>
+      <div class="menu-card-desc">Spicy jalape&ntilde;o meets sharp cheddar in a perfectly fried bite.</div>
     </div>
     <div class="menu-card" data-cat="starters">
       <div class="menu-card-top"><div class="menu-card-name">Mac &amp; Cheese Bites</div></div>
-      <div class="menu-card-desc">Comfort food taken to the next level — mac &amp; cheese in crispy bite-sized form.</div>
+      <div class="menu-card-desc">Comfort food taken to the next level &mdash; mac &amp; cheese in crispy bite-sized form.</div>
     </div>
     <div class="menu-card" data-cat="starters">
       <div class="menu-card-top"><div class="menu-card-name">Buffalo Shrimp</div></div>
       <div class="menu-card-desc">Crispy shrimp tossed in bold buffalo sauce. Great to share or keep all to yourself.</div>
     </div>
-    <!-- NACHOS & FRIES -->
     <div class="menu-card" data-cat="nachosFries">
       <div class="menu-card-subtitle">Fresh Made Nachos</div>
       <div class="menu-card-top"><div class="menu-card-name">Buffalo Chicken Nachos</div></div>
@@ -516,7 +963,7 @@
     <div class="menu-card" data-cat="nachosFries">
       <div class="menu-card-subtitle">Fresh Made Nachos</div>
       <div class="menu-card-top"><div class="menu-card-name">Chicken Bacon Ranch Nachos</div></div>
-      <div class="menu-card-desc">The crowd favorite nacho combo — chicken, bacon, and creamy ranch.</div>
+      <div class="menu-card-desc">The crowd favorite nacho combo &mdash; chicken, bacon, and creamy ranch.</div>
     </div>
     <div class="menu-card" data-cat="nachosFries">
       <div class="menu-card-subtitle">Fresh Made Nachos</div>
@@ -533,7 +980,6 @@
       <div class="menu-card-top"><div class="menu-card-name">Specialty Fries</div></div>
       <div class="menu-card-desc">Choose from: Cheese Fries, Cheddar Bacon Ranch Fries, Chili Cheese Fries, Bacon Mac &amp; Cheese Fries, or Disco Fries.</div>
     </div>
-    <!-- QUESADILLAS -->
     <div class="menu-card" data-cat="quesadillas">
       <div class="menu-card-top"><div class="menu-card-name">Classic Quesadillas</div></div>
       <div class="menu-card-desc">Cheese, Buffalo Chicken, BBQ Chicken, Veggie, or Chicken Bacon Ranch.</div>
@@ -547,11 +993,10 @@
       <div class="menu-card-top"><div class="menu-card-name">Signature Quesadillas</div></div>
       <div class="menu-card-desc">Cheesesteak Alfredo, Wyatt Earp, The Drunken Sailor, and The Gruber.</div>
     </div>
-    <!-- DESSERTS -->
     <div class="menu-card" data-cat="desserts">
       <div class="menu-badge">Must Have</div>
       <div class="menu-card-top"><div class="menu-card-name">Funnel Cake Fries</div></div>
-      <div class="menu-card-desc">"One of a kind" — a Port Jervis legend according to regulars. Sweet, crispy, and totally addictive.</div>
+      <div class="menu-card-desc">"One of a kind" &mdash; a Port Jervis legend according to regulars. Sweet, crispy, and totally addictive.</div>
     </div>
     <div class="menu-card" data-cat="desserts">
       <div class="menu-card-top"><div class="menu-card-name">Ice Cream Parfaits</div></div>
@@ -568,21 +1013,21 @@
     </div>
     <div class="menu-card" data-cat="desserts">
       <div class="menu-card-top"><div class="menu-card-name">Hard Ice Cream Scoops</div></div>
-      <div class="menu-card-desc">Dozens of flavors including: Panda Paws, Cookie Dough, Banana Cream Pie, Apple Pie, Birthday Bash, Black Raspberry, Cotton Candy, French Roast Coffee, Pistachio Nut, Butter Pecan, and more.</div>
+      <div class="menu-card-desc">Dozens of flavors: Panda Paws, Cookie Dough, Banana Cream Pie, Apple Pie, Birthday Bash, Black Raspberry, Cotton Candy, French Roast Coffee, Pistachio Nut, Butter Pecan, and more.</div>
     </div>
     <div class="menu-card" data-cat="desserts">
       <div class="menu-card-top"><div class="menu-card-name">Stuffedwich &amp; More</div></div>
       <div class="menu-card-desc">Mini or Mega Stuffedwich, Oreo Cheesecake Concrete, Cookie Dough Bowl Sundae, and Chocolate Dipped Waffle Cone.</div>
     </div>
-    <!-- KIDS -->
     <div class="menu-card" data-cat="kids">
       <div class="menu-card-top"><div class="menu-card-name">Kids' Meals</div></div>
       <div class="menu-card-desc">Hamburger, Cheeseburger, Hot Dog, Grilled Cheese, Chicken Nuggets, Macaroni &amp; Cheese, Crispy Chicken, Cheese Quesadilla, or Grilled Chicken.</div>
     </div>
   </div>
-  <p style="text-align:center; color:rgba(249,244,236,0.35); font-size:0.78rem; margin-top:2.5rem; font-style:italic;">Menu changes regularly — follow on Facebook for weekly specials &amp; features. Call for full current menu: (845) 856-9760</p>
+  <p style="text-align:center;color:rgba(249,244,236,0.35);font-size:0.78rem;margin-top:2.5rem;font-style:italic;">Menu changes regularly &mdash; follow on Facebook for weekly specials. Call for full current menu: <a href="tel:+18458569760" style="color:var(--gold)">(845) 856-9760</a></p>
 </section>
 
+<!-- REVIEWS -->
 <section class="reviews-section" id="reviews">
   <div class="reviews-header">
     <p class="section-eyebrow">What People Say</p>
@@ -591,33 +1036,34 @@
   <div class="rating-showcase">
     <div class="rating-big">4.4</div>
     <div class="rating-right">
-      <div class="rating-stars-lg">★★★★☆</div>
+      <div class="rating-stars-lg">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
       <div class="rating-count">Based on 1,519+ Google reviews</div>
-      <a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank" style="display:inline-block;margin-top:0.75rem;font-size:0.78rem;color:rgba(249,244,236,0.5);text-decoration:none;">Follow on Facebook for daily specials →</a>
+      <a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank" style="display:inline-block;margin-top:0.75rem;font-size:0.78rem;color:rgba(249,244,236,0.5);text-decoration:none;">Follow on Facebook for daily specials &rarr;</a>
     </div>
   </div>
   <div class="reviews-grid">
     <div class="review-card">
-      <div class="review-quote-mark">"</div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Always fun new items, super affordable, and delicious. Bobby is such a nice guy and the workers dish out the items so quickly. It's a non-negotiable that you must stop by when you're in town. The best way I can describe Ben's is if the best diner you've ever gone to did takeout."</div>
-      <div class="review-author">— Patrick</div>
+      <div class="review-quote-mark">&ldquo;</div>
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">&ldquo;Always fun new items, super affordable, and delicious. Bobby is such a nice guy and the workers dish out the items so quickly. It's a non-negotiable that you must stop by when you're in town. The best way I can describe Ben's is if the best diner you've ever gone to did takeout.&rdquo;</div>
+      <div class="review-author">&mdash; Patrick</div>
     </div>
     <div class="review-card">
-      <div class="review-quote-mark">"</div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"The menu will blow you away. One thing's for sure, they're very versatile. You'll probably never see some of the meals and shakes they make here, anywhere else. The Chicken Bacon Alfredo Wrap was the best and beastliest wrap I've ever had in my entire life."</div>
-      <div class="review-author">— Xiomara C.</div>
+      <div class="review-quote-mark">&ldquo;</div>
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">&ldquo;The menu will blow you away. One thing's for sure, they're very versatile. You'll probably never see some of the meals and shakes they make here, anywhere else. The Chicken Bacon Alfredo Wrap was the best and beastliest wrap I've ever had in my entire life.&rdquo;</div>
+      <div class="review-author">&mdash; Xiomara C.</div>
     </div>
     <div class="review-card">
-      <div class="review-quote-mark">"</div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Wraps: great. Burgers: great. Cannoli cheesecake parfait: amazing! It's a super homey hometown spot. Great for groups. One friend said since she'd been in New York she hadn't had a satisfying burger yet — but this spot did it!"</div>
-      <div class="review-author">— Jennifer T.</div>
+      <div class="review-quote-mark">&ldquo;</div>
+      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="review-text">&ldquo;Wraps: great. Burgers: great. Cannoli cheesecake parfait: amazing! It's a super homey hometown spot. Great for groups. One friend said since she'd been in New York she hadn't had a satisfying burger yet &mdash; but this spot did it!&rdquo;</div>
+      <div class="review-author">&mdash; Jennifer T.</div>
     </div>
   </div>
 </section>
 
+<!-- HOURS -->
 <section class="hours-section" id="hours">
   <div class="hours-inner">
     <div class="hours-title-block">
@@ -628,69 +1074,49 @@
       <a href="https://maps.google.com/?q=33+E+Main+St,+Port+Jervis,+NY+12771" target="_blank" class="btn-primary" style="display:inline-block">Get Directions</a>
     </div>
     <div>
-      <div class="hours-row" data-day="1">
-        <div class="hours-day">Monday</div>
-        <div class="hours-time">11:00 AM – 10:00 PM</div>
-      </div>
-      <div class="hours-row" data-day="2">
-        <div class="hours-day">Tuesday</div>
-        <div class="hours-time">11:00 AM – 10:00 PM</div>
-      </div>
-      <div class="hours-row" data-day="3">
-        <div class="hours-day">Wednesday</div>
-        <div class="hours-time">11:00 AM – 10:00 PM</div>
-      </div>
-      <div class="hours-row" data-day="4">
-        <div class="hours-day">Thursday</div>
-        <div class="hours-time">11:00 AM – 10:00 PM</div>
-      </div>
-      <div class="hours-row" data-day="5">
-        <div class="hours-day">Friday</div>
-        <div class="hours-time hours-late">11:00 AM – 11:00 PM</div>
-      </div>
-      <div class="hours-row" data-day="6">
-        <div class="hours-day">Saturday</div>
-        <div class="hours-time hours-late">11:00 AM – 11:00 PM</div>
-      </div>
-      <div class="hours-row" data-day="0" style="border-bottom:none">
-        <div class="hours-day">Sunday</div>
-        <div class="hours-time">11:00 AM – 10:00 PM</div>
-      </div>
-      <p style="font-size:0.72rem; color:var(--text-muted); margin-top:1rem; font-style:italic;">Hours may vary — call to confirm: <a href="tel:+18458569760" style="color:var(--red)">(845) 856-9760</a></p>
+      <div class="hours-row" data-day="1"><div class="hours-day">Monday</div><div class="hours-time">11:00 AM &ndash; 10:00 PM</div></div>
+      <div class="hours-row" data-day="2"><div class="hours-day">Tuesday</div><div class="hours-time">11:00 AM &ndash; 10:00 PM</div></div>
+      <div class="hours-row" data-day="3"><div class="hours-day">Wednesday</div><div class="hours-time">11:00 AM &ndash; 10:00 PM</div></div>
+      <div class="hours-row" data-day="4"><div class="hours-day">Thursday</div><div class="hours-time">11:00 AM &ndash; 10:00 PM</div></div>
+      <div class="hours-row" data-day="5"><div class="hours-day">Friday</div><div class="hours-time hours-late">11:00 AM &ndash; 11:00 PM</div></div>
+      <div class="hours-row" data-day="6"><div class="hours-day">Saturday</div><div class="hours-time hours-late">11:00 AM &ndash; 11:00 PM</div></div>
+      <div class="hours-row" data-day="0" style="border-bottom:none"><div class="hours-day">Sunday</div><div class="hours-time">11:00 AM &ndash; 10:00 PM</div></div>
+      <p style="font-size:0.72rem;color:var(--text-muted);margin-top:1rem;font-style:italic;">Hours may vary &mdash; call to confirm: <a href="tel:+18458569760" style="color:var(--red)">(845) 856-9760</a></p>
     </div>
   </div>
 </section>
 
+<!-- CTA / CONTACT -->
 <section class="cta-section" id="contact">
   <div class="cta-left">
     <p class="section-eyebrow" style="color:rgba(249,244,236,0.7)">Come Visit</p>
     <h2 class="section-title">Hungry? Come <em>on in.</em></h2>
-    <p>Whether you're dining in or grabbing takeout, Ben's Fresh is ready to serve you. Follow us on Facebook and Instagram for weekly specials — Chef Bobby is always cooking up something new.</p>
+    <p>Whether you're dining in or grabbing takeout, Ben's Fresh is ready to serve you. Follow us on Facebook and Instagram for weekly specials &mdash; Chef Bobby is always cooking up something new.</p>
   </div>
   <div class="cta-right">
     <div class="contact-item">
-      <div class="contact-icon">📍</div>
+      <div class="contact-icon">&#128205;</div>
       <div>
         <div class="contact-label">Address</div>
         <div class="contact-value"><a href="https://maps.google.com/?q=33+E+Main+St,+Port+Jervis,+NY+12771" target="_blank">33 E Main St, Port Jervis, NY 12771</a></div>
       </div>
     </div>
     <div class="contact-item">
-      <div class="contact-icon">📞</div>
+      <div class="contact-icon">&#128222;</div>
       <div>
         <div class="contact-label">Phone</div>
         <div class="contact-value"><a href="tel:+18458569760">(845) 856-9760</a></div>
       </div>
     </div>
     <div class="contact-item">
-      <div class="contact-icon">📘</div>
+      <div class="contact-icon">&#128104;</div>
       <div>
         <div class="contact-label">Facebook</div>
-        <div class="contact-value"><a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank">facebook.com — Ben's Fresh</a></div>
+        <div class="contact-value"><a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank">facebook.com &mdash; Ben's Fresh</a></div>
       </div>
     </div>
     <div class="contact-item">
-      <div class="contact-icon">📸</div>
+      <div class="contact-icon">&#128247;</div>
       <div>
         <div class="contact-label">Instagram</div>
         <div class="contact-value"><a href="https://www.instagram.com/bensfresh_portjervis_ny/" target="_blank">@bensfresh_portjervis_ny</a></div>
@@ -701,19 +1127,22 @@
 
 <footer>
   <div class="footer-logo">Ben's <span>Fresh</span></div>
-  <div class="footer-text">© 2025 Ben's Fresh · 33 E Main St, Port Jervis, NY 12771</div>
+  <div class="footer-text">&copy; 2025 Ben's Fresh &middot; 33 E Main St, Port Jervis, NY 12771</div>
   <div class="footer-socials">
     <a href="https://www.facebook.com/p/Bens-Fresh-100063774510982/" target="_blank" class="footer-social" aria-label="Facebook">f</a>
     <a href="https://www.instagram.com/bensfresh_portjervis_ny/" target="_blank" class="footer-social" aria-label="Instagram">ig</a>
-    <a href="tel:+18458569760" class="footer-social" aria-label="Call Us">☎</a>
+    <a href="tel:+18458569760" class="footer-social" aria-label="Call Us">&#9742;</a>
   </div>
 </footer>
 
-<!-- Back to top button -->
-<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+<div class="owner-note">
+  &#128248; To add real photos: find any "placeholder" div and replace it with: &lt;img src="your-photo.jpg" alt="description" style="width:100%;height:100%;object-fit:cover;"&gt; &mdash; save the image in the same folder as this HTML file.
+</div>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</button>
 
 <script>
-  // ── MENU TABS ──
+  // MENU TABS
   const tabs = document.querySelectorAll('.menu-tab');
   const cards = document.querySelectorAll('.menu-card');
   tabs.forEach(tab => {
@@ -727,31 +1156,27 @@
     });
   });
 
-  // ── HAMBURGER / MOBILE MENU ──
+  // HAMBURGER / MOBILE MENU
   const hamburger = document.querySelector('.nav-hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
   const mobileLinks = mobileMenu.querySelectorAll('a');
-
   function closeMenu() {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
     mobileMenu.setAttribute('aria-hidden', 'true');
   }
-
   hamburger.addEventListener('click', () => {
     const isOpen = hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open', isOpen);
     hamburger.setAttribute('aria-expanded', isOpen);
     mobileMenu.setAttribute('aria-hidden', !isOpen);
   });
-
   mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 
-  // ── SCROLL SPY (highlight active nav link) ──
-  const sections = document.querySelectorAll('#about, #menu, #reviews, #hours, #contact');
+  // SCROLL SPY
+  const sections = document.querySelectorAll('#about, #specials, #menu, #reviews, #hours, #contact');
   const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -762,22 +1187,19 @@
       }
     });
   }, { rootMargin: '-20% 0px -70% 0px' });
-
   sections.forEach(s => observer.observe(s));
 
-  // ── BACK TO TOP ──
+  // BACK TO TOP
   const backToTop = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
     backToTop.classList.toggle('visible', window.scrollY > 500);
   }, { passive: true });
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // ── TODAY HIGHLIGHT in hours ──
-  const todayIndex = new Date().getDay(); // 0 = Sun, 1 = Mon, etc.
+  // TODAY HIGHLIGHT
+  const todayIndex = new Date().getDay();
   document.querySelectorAll('.hours-row').forEach(row => {
-    if (parseInt(row.dataset.day) === todayIndex) {
-      row.classList.add('today');
-    }
+    if (parseInt(row.dataset.day) === todayIndex) row.classList.add('today');
   });
 </script>
 </body>
